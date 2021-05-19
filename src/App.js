@@ -1,19 +1,66 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css'
-import * as d3 from 'd3'
+import { scaleBand, scaleLinear, max} from 'd3';
+import { useData } from './requests/dataReq'
+import { CoordX } from './coords/coordX'
+import { CoordY } from './coords/coordY'
+import { Marcas } from './marcas/marcas'
 
-const dadosLink = './dados.csv'
-
-d3.csv('https://gist.githubusercontent.com/gabrielpires01/2f2b2113a181f0bf1d48b1fb37956e80/raw/e01fd1d883f37194e7e5fcd360368539fea9906f/candidatos.csv', function(dado) {
-    console.log(dado)
-})
+const width = 500;
+const height = 100;
+const margin = {top:20,bottom:20,left:100,right:20}
 
 function App()  {
+    const data= useData()
+    let noticiasFrei = 0;
+    let noticiasCriv = 0;
+    let candidatos = [];
+    // numero de noticias dos candidatos
+
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].candidato === "Crivella") {
+            noticiasCriv += 1
+        } else if (data[i].candidato === "Freixo") {
+            noticiasFrei += 1
+        }
+    }
+    let numerosNot = [noticiasCriv,noticiasFrei]
+
+    // array dos candidatos
+    for(let i = 0; i < data.length; i++) {
+        if(!candidatos.includes(data[i].candidato) && (data[i].candidato === "Crivella" || data[i].candidato === "Freixo")) {
+            candidatos.push(data[i].candidato)
+        }
+
+    }
+
+    const innerHeight = height - margin.top - margin.bottom
+    const innerWidth = width - margin.left - margin.right
+
+    // define a escala y em relacao ao nome dos candidatos
+    const yScale = scaleBand()
+        .domain(candidatos)
+        .range([0, innerHeight])
+        .padding(0.2)
+
+    // define a escala x em relacao ao nome dos candidatos
+    const xScale = scaleLinear()
+        .domain([600, max(numerosNot, d => d)]
+        )
+        .range([0, innerWidth])
+
     return (
-        <div>
-            <h1>Isso ira gerar graficos e outras coisas importantes sobre a disputa de Freixo e Crivella.</h1>
-        </div>
+        <svg width={width} height={height}>
+            <g transform ={`translate(${margin.left},${margin.right})`} >
+                <CoordX xScale={xScale} innerHeight={innerHeight}/>
+                <CoordY yScale={yScale} />
+                <Marcas 
+                    candidatos={candidatos}
+                    xScale={xScale}
+                    yScale={yScale}
+                    numerosNot={numerosNot} />
+            </g>
+        </svg>
     )
     
 }
