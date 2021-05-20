@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { csv } from 'd3';
+import { tsv } from 'd3';
 
-const csvUrl = 'https://gist.githubusercontent.com/gabrielpires01/2f2b2113a181f0bf1d48b1fb37956e80/raw/e01fd1d883f37194e7e5fcd360368539fea9906f/candidatos.csv'
+const tsvUrl = 'https://gist.githubusercontent.com/gabrielpires01/c746854952365835d37513e932842572/raw/candidatos.tsv'
 
 export const useData = () => {
     const [data, setData] = useState(null)
     
     // fetching data
     useEffect(() => {
-        csv(csvUrl).then(setData);
+        tsv(tsvUrl).then(setData);
     }, []);
 
     if(!data) {

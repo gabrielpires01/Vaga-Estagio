@@ -12,3 +12,17 @@ export const CoordX = ({xScale,innerHeight}) =>
             </text>
         </g> 
     ));
+
+export const CoordXContrario = ({yScale,innerHeight}) => 
+    yScale.domain().map(tickValue => (
+        <text
+            className="jornais"
+            key={tickValue}
+            style={{textAnchor:'end'}}
+            dx='1.3em'
+            y={innerHeight + yScale.bandwidth()/2 }
+            x={yScale(tickValue)  + yScale.bandwidth()/2} 
+        >
+            {tickValue}
+        </text>
+    ))

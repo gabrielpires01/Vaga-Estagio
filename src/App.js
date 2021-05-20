@@ -50,15 +50,16 @@ function App()  {
         .range([0, innerWidth])
 
     return (
-        <svg width={width} height={height}>
+        <svg className='numNoticias' width={width} height={height}>
             <g transform ={`translate(${margin.left},${margin.right})`} >
                 <CoordX xScale={xScale} innerHeight={innerHeight}/>
                 <CoordY yScale={yScale} />
+                <text x={innerWidth/2} textAnchor='middle' y='-8'>Número de notícias por candidato</text>
                 <Marcas 
-                    candidatos={candidatos}
+                    x={candidatos}
                     xScale={xScale}
                     yScale={yScale}
-                    numerosNot={numerosNot} />
+                    numeros={numerosNot} />
             </g>
         </svg>
     )

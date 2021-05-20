@@ -1,6 +1,20 @@
+body {
+    font-family: 'Merriweather', serif;
+    display: flex;
+}
 .tick line{
     stroke: #C0C0BB;
 }
 .tick text{
     fill: #8E8883;
+}
+
+.barras {
+    fill: #E3BA22;
+}
+.numNoticias {
+    margin-top: 3%;
+}
+.jornais {
+    font-size: 0.75em;
 }
