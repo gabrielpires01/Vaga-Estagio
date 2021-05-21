@@ -5,16 +5,15 @@ import { CoordYContrario } from '../coords/coordY'
 import { MarcasContrario } from '../marcas/marcas'
 
 
-const width = 700;
-const height = 600;
+const width = 500;
+const height = 300;
 const margin = {top:30,bottom:30,left:100,right:20}
 
 function Jornais () {
     const data = useData();
     let jornais = [];
-    let numeros = []
+    let numeros = [];
 
-    
 
     for (let i = 0; i < data.length; i++) {
         if (!jornais.includes(data[i].source)) {
@@ -35,26 +34,24 @@ function Jornais () {
     const innerWidth = width - margin.left - margin.right
 
     const yScale = scaleLinear()
-        .domain([0,max(numeros.slice(0,10), d => d)])
-        .range([innerHeight, 0])
+        .domain([0,max(numeros.slice(0,10), d => d)]).nice()
+        .range([innerHeight,0])
 
     const xScale = scaleBand()
         .domain(jornais.slice(0,10))
         .range([0, innerWidth])
         .padding(0.1)
-
-    console.log(numeros.slice(0,10))
     
     return (
         <svg width={width} height={height}>
             <g transform ={`translate(${margin.left},${margin.right})`} >
-                <CoordXContrario yScale={xScale} innerWidth={innerWidth} innerHeight={innerHeight}/>
-                <CoordYContrario xScale={yScale}/>
+                <CoordXContrario xScale={xScale}  innerHeight={innerHeight}/>
+                <CoordYContrario yScale={yScale} innerWidth={innerWidth}/>
                 <text x={innerWidth/2} textAnchor='middle' y='-8'>Número de notícias por Jornal</text>
                 <MarcasContrario 
-                    x={jornais}
-                    xScale={yScale}
-                    yScale={xScale}
+                    x={jornais.slice(0,10)}
+                    xScale={xScale}
+                    yScale={yScale}
                     numeros={numeros}
                     innerHeight={innerHeight}
                 />

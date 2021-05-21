@@ -11,10 +11,10 @@ export const CoordY = ({yScale}) =>
         </text>
     ))
 
-export const CoordYContrario = ({xScale,innerWidth,innerHeight}) => 
-    xScale.ticks().map(tickValue => (
-        <g className="tick" key={tickValue} transform={`translate(0,${xScale(tickValue)})`}>
-            <line x2={innerWidth} y2={innerHeight} />
+export const CoordYContrario = ({yScale,innerWidth,innerHeight}) => 
+    yScale.ticks().map(tickValue => (
+        <g className="tick" key={tickValue} transform={`translate(0,${yScale(tickValue)})`}>
+            <line x2={innerWidth}/>
             <text
                 style={{textAnchor: 'middle'}} 
                 dx='.71em' 

@@ -15,9 +15,9 @@ export const MarcasContrario = ({innerHeight,x,xScale,yScale,numeros}) =>
         <rect
             className='barras'
             key={d}
-            y='0s' 
-            x={yScale(d)} 
-            height={xScale(numeros[i])} 
-            width={yScale.bandwidth()}
+            y= {yScale(numeros[i])} 
+            x={xScale(d)} 
+            height={innerHeight - yScale(numeros[i])} 
+            width={xScale.bandwidth()}
         />
     ))
