@@ -8,7 +8,12 @@ export const useData = () => {
     
     // fetching data
     useEffect(() => {
-        tsv(tsvUrl).then(setData);
+        const row = d => {
+            d.date_published = new Date(d.date_published);
+            return d
+        }
+
+        tsv(tsvUrl, row).then(setData);
     }, []);
 
     if(!data) {

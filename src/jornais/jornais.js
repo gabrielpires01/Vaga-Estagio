@@ -6,14 +6,13 @@ import { MarcasContrario } from '../marcas/marcas'
 
 
 const width = 500;
-const height = 300;
-const margin = {top:30,bottom:30,left:100,right:20}
+const height = 350;
+const margin = {top:30,bottom:50,left:100,right:20}
 
 function Jornais () {
     const data = useData();
     let jornais = [];
     let numeros = [];
-
 
     for (let i = 0; i < data.length; i++) {
         if (!jornais.includes(data[i].source)) {
@@ -41,13 +40,13 @@ function Jornais () {
         .domain(jornais.slice(0,10))
         .range([0, innerWidth])
         .padding(0.1)
-    
+
     return (
-        <svg width={width} height={height}>
+        <svg className='graf2' width={width} height={height}>
             <g transform ={`translate(${margin.left},${margin.right})`} >
                 <CoordXContrario xScale={xScale}  innerHeight={innerHeight}/>
                 <CoordYContrario yScale={yScale} innerWidth={innerWidth}/>
-                <text x={innerWidth/2} textAnchor='middle' y='-8'>Número de notícias por Jornal</text>
+                <text className='label' x={innerWidth/2} textAnchor='middle' y={innerHeight + 40}>Jornais</text>
                 <MarcasContrario 
                     x={jornais.slice(0,10)}
                     xScale={xScale}

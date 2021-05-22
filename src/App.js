@@ -45,8 +45,7 @@ function App()  {
 
     // define a escala x em relacao ao nome dos candidatos
     const xScale = scaleLinear()
-        .domain([600, max(numerosNot, d => d)]
-        )
+        .domain([600, max(numerosNot, d => d)])
         .range([0, innerWidth])
 
     return (
