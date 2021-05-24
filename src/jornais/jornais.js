@@ -5,9 +5,9 @@ import { CoordYContrario } from '../coords/coordY'
 import { MarcasContrario } from '../marcas/marcas'
 
 
-const width = 500;
+const width = 600;
 const height = 350;
-const margin = {top:30,bottom:50,left:100,right:20}
+const margin = {top:30,bottom:50,left:130,right:20}
 
 function Jornais () {
     const data = useData();
@@ -42,11 +42,17 @@ function Jornais () {
         .padding(0.1)
 
     return (
-        <svg className='graf2' width={width} height={height}>
+        <svg className='graf' id='jornais' width={width} height={height}>
             <g transform ={`translate(${margin.left},${margin.right})`} >
                 <CoordXContrario xScale={xScale}  innerHeight={innerHeight}/>
                 <CoordYContrario yScale={yScale} innerWidth={innerWidth}/>
-                <text className='label' x={innerWidth/2} textAnchor='middle' y={innerHeight + 40}>Jornais</text>
+                <text className='label' x={innerWidth/2} textAnchor='middle' y={innerHeight + 50}>Principais Jornais</text>
+                <text className='label' 
+                    textAnchor='middle' 
+                    transform= {`translate(${-85}, ${innerHeight/2}) rotate(270)`}
+                >
+                    Notícias por Jornal
+                </text>
                 <MarcasContrario 
                     x={jornais.slice(0,10)}
                     xScale={xScale}

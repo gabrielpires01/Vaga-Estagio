@@ -1,6 +1,7 @@
 export const CoordY = ({yScale}) => 
     yScale.domain().map(tickValue => (
         <text
+            className='candi'
             key={tickValue}
             style={{textAnchor:'end'}}
             dy='0.32em'
@@ -25,16 +26,3 @@ export const CoordYContrario = ({yScale,innerWidth}) =>
             </text>
         </g> 
     ));
-
-export const CoordYCircu = ({yScale}) => 
-    yScale.domain().map(tickValue => (
-        <text
-            key={tickValue}
-            style={{textAnchor:'end'}}
-            dy='0.32em'
-            x='-9'
-            y={yScale(tickValue)} 
-        >
-            {tickValue}
-        </text>
-    ))

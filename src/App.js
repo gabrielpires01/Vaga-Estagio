@@ -7,8 +7,8 @@ import { CoordY } from './coords/coordY'
 import { Marcas } from './marcas/marcas'
 
 const width = 500;
-const height = 100;
-const margin = {top:20,bottom:20,left:100,right:20}
+const height = 200;
+const margin = {top:20,bottom:60,left:100,right:20}
 
 function App()  {
     const data= useData()
@@ -29,7 +29,7 @@ function App()  {
     // array dos candidatos
     for(let i = 0; i < data.length; i++) {
         if(!candidatos.includes(data[i].candidato) && (data[i].candidato === "Crivella" || data[i].candidato === "Freixo")) {
-            candidatos.push(data[i].candidato)
+            candidatos.unshift(data[i].candidato)
         }
 
     }
@@ -49,11 +49,11 @@ function App()  {
         .range([0, innerWidth])
 
     return (
-        <svg className='numNoticias' width={width} height={height}>
+        <svg className='graf' id='candNums' width={width} height={height}>
             <g transform ={`translate(${margin.left},${margin.right})`} >
                 <CoordX xScale={xScale} innerHeight={innerHeight}/>
                 <CoordY yScale={yScale} />
-                <text x={innerWidth/2} textAnchor='middle' y='-8'>Número de notícias por candidato</text>
+                <text className='label' x={innerWidth/2} textAnchor='middle' y={innerHeight + 40}>Número de notícias por candidato</text>
                 <Marcas 
                     x={candidatos}
                     xScale={xScale}
